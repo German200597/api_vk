@@ -2,8 +2,8 @@ import requests
 from pprint import pprint
 import os 
 
-# token = input('Введите токен: ')
-token = 'b1d9571ff9576245c1259d7e1ba089e0c9373c165e0f601d84ec677c29773a1be44cb7eebce71a5acbaca'
+token = input('Введите токен: ')
+# token = 'b1d9571ff9576245c1259d7e1ba089e0c9373c165e0f601d84ec677c29773a1be44cb7eebce71a5acbaca'
 
 class VkUser:
     url = 'https://api.vk.com/method/'
@@ -14,11 +14,11 @@ class VkUser:
             'access_token' : self.token,
             'v': self.version
         } 
-        self.id = int(input('Введите id: '))
+        self.id = id
         
     def __and__(self, other):
-        first_id = int(input('Введите id первого пользователя: '))
-        second_id = int(input('Введите id второго пользователя: '))
+        first_id = self.id
+        second_id = self.id
         self.params_for_mutual_friends = {'access_token': token, 
         'v':'5.126', 
         'source_uid': first_id, 
@@ -31,7 +31,7 @@ class VkUser:
             'access_token' : token,
             'v': '5.126',
             'fields': 'domain',
-            'id': 'Введите id пользователя'
+            'id': self.id
         } 
         screen_name = requests.get(url+'users.get', params).json()['response'][0]['domain']
 
@@ -40,8 +40,8 @@ class VkUser:
 
        
     
-vk_client = VkUser(token, '5.126')
-vk_client_two = VkUser(token, '5.126')
+vk_client = VkUser(token, '5.126', 33468893)
+vk_client_two = VkUser(token, '5.126', 552934290)
 # print(vk_client)
 vk_client&vk_client_two
 
