@@ -3,7 +3,6 @@ from pprint import pprint
 import os 
 
 token = input('Введите токен: ')
-# token = 'b1d9571ff9576245c1259d7e1ba089e0c9373c165e0f601d84ec677c29773a1be44cb7eebce71a5acbaca'
 
 class VkUser:
     url = 'https://api.vk.com/method/'
@@ -26,7 +25,8 @@ class VkUser:
         self.mutual_friends = requests.get(self.url+'friends.getMutual', self.params_for_mutual_friends).json()['response']
         print(self.mutual_friends)
          
-    def print(user_name):
+    def __str__(self):
+        url = 'https://api.vk.com/method/'
         params = {
             'access_token' : token,
             'v': '5.126',
@@ -35,15 +35,18 @@ class VkUser:
         } 
         screen_name = requests.get(url+'users.get', params).json()['response'][0]['domain']
 
-        url_two = 'https://vk.com/' + str(screen_name)
-        print(url_two)
+        url_two = str('https://vk.com/' + str(screen_name))
+        return url_two
 
        
-    
-vk_client = VkUser(token, '5.126', 33468893)
-vk_client_two = VkUser(token, '5.126', 552934290)
-# print(vk_client)
+first = int(input('Введите id пользователя: '))  
+second = int(input('Введите id пользователя: '))  
+
+vk_client = VkUser(token, '5.126', first)
+vk_client_two = VkUser(token, '5.126', second)
+
 vk_client&vk_client_two
+print(vk_client)
 
 
 
